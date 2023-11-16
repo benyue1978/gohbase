@@ -29,11 +29,11 @@ import (
 
 	log "github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
-	"github.com/tsuna/gohbase"
-	"github.com/tsuna/gohbase/filter"
-	"github.com/tsuna/gohbase/hrpc"
-	"github.com/tsuna/gohbase/pb"
-	"github.com/tsuna/gohbase/region"
+	"github.com/yuesong1978/gohbase"
+	"github.com/yuesong1978/gohbase/filter"
+	"github.com/yuesong1978/gohbase/hrpc"
+	"github.com/yuesong1978/gohbase/pb"
+	"github.com/yuesong1978/gohbase/region"
 	"google.golang.org/protobuf/proto"
 )
 

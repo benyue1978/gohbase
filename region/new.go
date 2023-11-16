@@ -14,8 +14,8 @@ import (
 	"net"
 	"time"
 
-	"github.com/tsuna/gohbase/compression"
-	"github.com/tsuna/gohbase/hrpc"
+	"github.com/yuesong1978/gohbase/compression"
+	"github.com/yuesong1978/gohbase/hrpc"
 )
 
 // NewClient creates a new RegionClient.

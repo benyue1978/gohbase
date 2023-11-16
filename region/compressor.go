@@ -11,7 +11,7 @@ import (
 	"io"
 	"net"
 
-	"github.com/tsuna/gohbase/compression"
+	"github.com/yuesong1978/gohbase/compression"
 )
 
 type compressor struct {

@@ -6,8 +6,8 @@ import (
 
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
-	"github.com/tsuna/gohbase/hrpc"
-	"github.com/tsuna/gohbase/region"
+	"github.com/yuesong1978/gohbase/hrpc"
+	"github.com/yuesong1978/gohbase/region"
 )
 
 func TestDebugStateSanity(t *testing.T) {
