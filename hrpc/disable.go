@@ -7,7 +7,6 @@ package hrpc
 
 import (
 	"context"
-
 	"github.com/tsuna/gohbase/pb"
 	"google.golang.org/protobuf/proto"
 )
@@ -15,17 +14,19 @@ import (
 // DisableTable represents a DisableTable HBase call
 type DisableTable struct {
 	base
+	namespace []byte
 }
 
 // NewDisableTable creates a new DisableTable request that will disable the
 // given table in HBase. For use by the admin client.
-func NewDisableTable(ctx context.Context, table []byte) *DisableTable {
+func NewDisableTable(ctx context.Context, namespace []byte, table []byte) *DisableTable {
 	return &DisableTable{
-		base{
+		base: base{
 			table:    table,
 			ctx:      ctx,
 			resultch: make(chan RPCResult, 1),
 		},
+		namespace: namespace,
 	}
 }
 
@@ -43,8 +44,7 @@ func (dt *DisableTable) Description() string {
 func (dt *DisableTable) ToProto() proto.Message {
 	return &pb.DisableTableRequest{
 		TableName: &pb.TableName{
-			// TODO: handle namespaces
-			Namespace: []byte("default"),
+			Namespace: dt.namespace,
 			Qualifier: dt.table,
 		},
 	}

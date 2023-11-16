@@ -7,7 +7,6 @@ package hrpc
 
 import (
 	"context"
-
 	"github.com/tsuna/gohbase/pb"
 	"google.golang.org/protobuf/proto"
 )
@@ -15,17 +14,19 @@ import (
 // DeleteTable represents a DeleteTable HBase call
 type DeleteTable struct {
 	base
+	namespace []byte
 }
 
 // NewDeleteTable creates a new DeleteTable request that will delete the
 // given table in HBase. For use by the admin client.
-func NewDeleteTable(ctx context.Context, table []byte) *DeleteTable {
+func NewDeleteTable(ctx context.Context, namespace []byte, table []byte) *DeleteTable {
 	return &DeleteTable{
-		base{
+		base: base{
 			table:    table,
 			ctx:      ctx,
 			resultch: make(chan RPCResult, 1),
 		},
+		namespace: namespace,
 	}
 }
 
@@ -43,8 +44,7 @@ func (dt *DeleteTable) Description() string {
 func (dt *DeleteTable) ToProto() proto.Message {
 	return &pb.DeleteTableRequest{
 		TableName: &pb.TableName{
-			// TODO: hadle namespaces properly
-			Namespace: []byte("default"),
+			Namespace: dt.namespace,
 			Qualifier: dt.table,
 		},
 	}

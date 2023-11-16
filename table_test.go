@@ -173,14 +173,14 @@ func TestDisableDeleteTable(t *testing.T) {
 	}
 
 	// disable
-	dit := hrpc.NewDisableTable(context.Background(), []byte(testTableName))
+	dit := hrpc.NewDisableTable(context.Background(), []byte("default"), []byte(testTableName))
 	err := ac.DisableTable(dit)
 	if err != nil {
 		t.Errorf("DisableTable returned an error: %v", err)
 	}
 
 	// HBase protobuf will error if testTableName wasn't disabled before deletion
-	det := hrpc.NewDeleteTable(context.Background(), []byte(testTableName))
+	det := hrpc.NewDeleteTable(context.Background(), []byte("default"), []byte(testTableName))
 	err = ac.DeleteTable(det)
 	if err != nil {
 		t.Errorf("DeleteTable returned an error: %v", err)
@@ -223,7 +223,7 @@ func TestEnableTable(t *testing.T) {
 	}
 
 	// disable
-	dit := hrpc.NewDisableTable(context.Background(), []byte(testTableName))
+	dit := hrpc.NewDisableTable(context.Background(), []byte("default"), []byte(testTableName))
 	err := ac.DisableTable(dit)
 	if err != nil {
 		t.Errorf("DisableTable returned an error: %v", err)
@@ -235,7 +235,7 @@ func TestEnableTable(t *testing.T) {
 		t.Errorf("EnableTable returned an error: %v", err)
 	}
 
-	delt := hrpc.NewDeleteTable(context.Background(), []byte(testTableName))
+	delt := hrpc.NewDeleteTable(context.Background(), []byte("default"), []byte(testTableName))
 	err = ac.DeleteTable(delt)
 	if err == nil || !strings.Contains(err.Error(), "TableNotDisabledException") {
 		t.Errorf("DeleteTable should error with TableNotDisabledException, got %s", err)
